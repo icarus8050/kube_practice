@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo
+  labels:
+    app: echo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: echo
+  template:
+    metadata:
+      labels:
+        app: echo
+    spec:
+      containers:
+        - name: hello-server-one
+          image: leafy8050/spring-server:latest
+          env:
+            - name: MY_NAME
+              value: ONE
+            - name: MY_PORT
+              value: "8081"
+          ports:
+            - containerPort: 8081
+
+        - name: hello-server-two
+          image: leafy8050/spring-server:latest
+          env:
+            - name: MY_NAME
+              value: TWO
+            - name: MY_PORT
+              value: "8082"
+          ports:
+            - containerPort: 8082
